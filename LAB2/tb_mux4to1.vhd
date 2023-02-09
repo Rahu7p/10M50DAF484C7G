@@ -54,6 +54,7 @@ BEGIN
 					WRITE( str_o, STRING'( " expect= "  	));	WRITE( str_o, expect	);
 					ASSERT false REPORT TIME'IMAGE( NOW ) & str_o.ALL
 						SEVERITY note;
+					DEALLOCATE( str_o );
 				END PROCESS;		
 
 END ARCHITECTURE;
