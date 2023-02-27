@@ -1,15 +1,15 @@
 library ieee;
-use 		ieee.std_logic_1164.all;
-use 		ieee.numeric_std.all;
+use 	ieee.std_logic_1164.all;
+use 	ieee.numeric_std.all;
 
 entity baudrate_gen is
 	generic(
-    --M = clk_freq / baudrate, without oversampling
-		M: integer 	:= 5208;  --M = 50 MHz / 9600
-		N:	integer	:= 13		  --size of M
+    		--M = clk_freq / baudrate, without oversampling
+		M: integer 	:= 5208;	--M = 50 MHz / 9600
+		N: integer	:= 13;		--size of M
 	);
 	port(
-		clk, reset: in 	std_logic;
+		clk, reset:	in 	std_logic;
 		tick: 		out 	std_logic
 	);
 end baudrate_gen;
@@ -32,6 +32,6 @@ begin
 	clk16_next	<= (others => '0')	when clk16_reg=(M-1)	else clk16_reg + 1;
 	
 	-- output logic
-	tick	 		<= '1'					when clk16_reg=0 		else '0';
+	tick	 	<= '1'			when clk16_reg=0 	else '0';
 
 end Behavior;
