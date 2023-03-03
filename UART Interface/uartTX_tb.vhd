@@ -63,5 +63,4 @@ begin
 		wait;
 	 
 	end process;
-   
 end Behave;
