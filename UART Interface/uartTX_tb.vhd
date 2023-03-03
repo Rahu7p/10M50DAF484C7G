@@ -16,21 +16,21 @@ architecture Behave of uartTX_tb is
  
 	constant c_BIT_PERIOD : time := 8680 ns;
    
-	signal clk_tb     	: std_logic                 		:= '0';
-	signal tx_start_tb     : std_logic                   	:= '0';
-	signal s_tick_tb	: std_logic								:= '0';
-	signal d_in_tb   : std_logic_vector(7 downto 0)	:= (others => '0');
-	signal tx_done_tick_tb   : std_logic;
-	signal tx_tb : std_logic;
+	signal clk_tb     	: std_logic                 	:= '0';
+	signal tx_start_tb     	: std_logic                   	:= '0';
+	signal s_tick_tb	: std_logic			:= '0';
+	signal d_in_tb   	: std_logic_vector(7 downto 0)	:= (others => '0');
+	signal tx_done_tick_tb	: std_logic			:= '0';
+	signal tx_tb 		: std_logic			:= '1';
 
 	COMPONENT uart IS
 	PORT(
 		clk, reset: 	in 	std_logic;
-		tx_start: 		in 	std_logic;
-		s_tick: 			in		std_logic;
-		d_in: 			in 	std_logic_vector(7 downto 0);
+		tx_start: 	in 	std_logic;
+		s_tick: 	in	std_logic;
+		d_in: 		in 	std_logic_vector(7 downto 0);
 		tx_done_tick:	out	std_logic;
-		tx: 				out 	std_logic
+		tx: 		out 	std_logic
 		);
 	END COMPONENT;
    
@@ -38,7 +38,7 @@ begin
  
 	clk_tb <= not clk_tb after c_CLK_PERIOD/2;
 
-   -- Instantiate UART transmitter
+   	-- Instantiate UART transmitter
 	DUT:	uart port map(clk_tb, '0', tx_start_tb, s_tick_tb, d_in_tb, tx_done_tick_tb, tx_tb);
    
 	process is
@@ -54,11 +54,11 @@ begin
 		tx_start_tb   <= '0';
 	 
 		data1:	for i in 0 to 9 loop
-						wait for 8680 ns;
-						s_tick_tb <= '1'; 
-						wait until rising_edge(clk_tb);	
-						s_tick_tb <= '0';
-					end loop data1; 
+				wait for 8680 ns;
+				s_tick_tb <= '1'; 
+				wait until rising_edge(clk_tb);	
+				s_tick_tb <= '0';
+			end loop data1; 
 	
 		wait;
 	 
