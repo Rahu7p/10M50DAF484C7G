@@ -48,10 +48,12 @@ begin
 		wait until rising_edge(clk_tb);
 		wait until rising_edge(clk_tb);
 		tx_start_tb   <= '1';
+		s_tick_tb <= '1';
 		d_in_tb <= X"55"; 
 	 	 
 		wait until rising_edge(clk_tb);	
 		tx_start_tb   <= '0';
+		s_tick_tb <= '0';
 	 
 		data1:	for i in 0 to 9 loop
 				wait for 8680 ns;
