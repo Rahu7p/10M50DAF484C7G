@@ -3,10 +3,10 @@ USE      ieee.std_logic_1164.ALL;
 
 ENTITY mux_4to1 IS
   PORT(
-    x0, x1, x2, x3  :  IN  std_logic;
-    sel            :  IN  std_logic_vector( 1 DOWNTO 0 );
-    y              :  OUT  std_logic 
-	);
+    x0, x1, x2, x3  :  IN   std_logic;
+    sel             :  IN   std_logic_vector( 1 DOWNTO 0 );
+    y               :  OUT  std_logic 
+  );
 END ENTITY;
 
 ARCHITECTURE dataflow OF mux_4to1 IS
