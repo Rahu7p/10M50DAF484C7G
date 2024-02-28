@@ -35,6 +35,7 @@ BEGIN
 						x0_tb <= '0'; x1_tb <= '1'; x2_tb <= '0'; x3_tb <= '1'; sel_tb <= "10"; expect <= '0';
 					WAIT FOR 10 ns;
 						x0_tb <= '0'; x1_tb <= '1'; x2_tb <= '0'; x3_tb <= '1'; sel_tb <= "11"; expect <= '1';
+					WAIT FOR 10 ns;
 					WAIT;
 				END PROCESS;
 END ARCHITECTURE;
