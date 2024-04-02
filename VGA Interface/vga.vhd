@@ -1,5 +1,5 @@
 LIBRARY ieee;
-USE ieee.std_logic_1164.all;
+USE 	ieee.std_logic_1164.all;
 
 ENTITY vga IS
 	GENERIC (
@@ -13,22 +13,17 @@ ENTITY vga IS
 		Vd: INTEGER := 525); --Vpulse+VBP+Vactive+VFP
 	PORT (
 		clk: IN STD_LOGIC; --50MHz in our board
-		red_switch, green_switch, blue_switch: IN STD_LOGIC;
-		pixel_clk: BUFFER STD_LOGIC;
 		Hsync, Vsync: BUFFER STD_LOGIC;
-		R, G, B: OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
-		nblanck, nsync : OUT STD_LOGIC);
-	END vga;
+		R, G, B: OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
+	);
+END vga;
 
 ARCHITECTURE vga OF vga IS
-SIGNAL Hactive, Vactive, dena: STD_LOGIC;
+SIGNAL Hactive, Vactive, dena, pixel_clk: STD_LOGIC;
 BEGIN
 -------------------------------------------------------
 --Part 1: CONTROL GENERATOR
 -------------------------------------------------------
-	--Static signals for DACs:
-	nblanck <= '1'; --no direct blanking
-	nsync <= '0'; --no sync on green
 	--Create pixel clock (50MHz->25MHz):
 	PROCESS (clk)
 	BEGIN
@@ -64,7 +59,7 @@ BEGIN
 	-------------------------------------------------------
 	--Part 2: IMAGE GENERATOR
 	-------------------------------------------------------
-	PROCESS (Hsync, Vsync, Vactive, dena, red_switch, green_switch, blue_switch)
+	PROCESS (Hsync, Vsync, Vactive, dena)
 	VARIABLE line_counter: INTEGER RANGE 0 TO Vc;
 	BEGIN
 		IF (Vsync='0') THEN
@@ -88,9 +83,9 @@ BEGIN
 				G <= (OTHERS => '0');
 				B <= (OTHERS => '1');
 			ELSE
-				R <= (OTHERS => red_switch);
-				G <= (OTHERS => green_switch);
-				B <= (OTHERS => blue_switch);
+				R <= (OTHERS => '0');
+				G <= (OTHERS => '0');
+				B <= (OTHERS => '0');
 			END IF;
 		ELSE
 			R <= (OTHERS => '0');
