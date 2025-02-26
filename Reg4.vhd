@@ -13,11 +13,11 @@ begin
    process(clk) begin
       if (rising_edge(clk)) then
          if rst = '1' then
-         Q <= "0000";
+            Q <= "0000";
          else
-         if ld = '1' then
-            Q <= I;
-         end if;
+            if ld = '1' then
+               Q <= I;
+            end if;
          end if;
       end if;
    end process;
