@@ -9,7 +9,7 @@ ENTITY DE10_Lite IS
 	);
 END DE10_Lite;
 
-ARCHITECTURE structural OF switch_to_led IS
+ARCHITECTURE structural OF DE10_Lite IS
 
 	COMPONENT mux_4to1 IS
 		PORT(
