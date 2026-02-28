@@ -37,7 +37,7 @@ BEGIN
       	ASSERT( y = expect ) REPORT "Mismatch! when sel=2" SEVERITY error;
       		sel <= "11"; expect <= '1';
     	WAIT FOR 10 ns;
-      	ASSERT( y = expect ) REPORT "Mismatch! when sel=3" SEVERITY error;    
+      	ASSERT( y = expect ) REPORT "Mismatch! when sel=3" SEVERITY error;
 		WAIT; --wait forever!!
   	END PROCESS;
 END sim;
