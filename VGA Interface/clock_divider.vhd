@@ -1,32 +1,34 @@
 LIBRARY 	ieee;
 USE 		ieee.std_logic_1164.all;
-USE 		ieee.std_logic_unsigned.all;
+USE 		ieee.numeric_std.all;
 
 ENTITY clock_divider IS
    PORT( 
-		clk, rst	:	IN  STD_LOGIC;
-      		clk_out		: 	OUT STD_LOGIC 
+		clk, rst:	IN  std_logic;
+     	clk_out	: 	OUT std_logic 
 	);
-END clock_divider;
+END ENTITY;
 
+ARCHITECTURE behavioral OF clock_divider IS
+	
+	SIGNAL count : positive;
+	SIGNAL tmp   : std_logic := '0';
 
-ARCHITECTURE behavior OF clock_divider IS
-	SIGNAL count : POSITIVE;
-	SIGNAL tmp   : STD_LOGIC := '0';
-BEGIN
-	PROCESS( clk, rst )
 	BEGIN
-		IF rst = '0' THEN 
-			count <= 1; 
-			tmp   <= '0';
-		ELSIF rising_edge( clk ) THEN
-			count <= count + 1;
-			-- ( 50MHz/1Hz ) * 0.5 
-			IF( count = 25000000 ) THEN
-				tmp   <= NOT tmp;
-				count <= 1;
+		PROCESS( clk, rst )
+		BEGIN
+			IF rst = '0' THEN 
+				count <= 1; 
+				tmp   <= '0';
+			ELSIF rising_edge( clk ) THEN
+				count <= count + 1;
+				-- ( 50MHz/1Hz ) * 0.5 
+				IF( count = 25000000 ) THEN
+					tmp   <= NOT tmp;
+					count <= 1;
+				END IF;
 			END IF;
-		END IF;
-		clk_out <= tmp;
+			clk_out <= tmp;
 	END PROCESS;
-END behavior;
+	
+END ARCHITECTURE;
