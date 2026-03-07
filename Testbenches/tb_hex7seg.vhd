@@ -32,7 +32,7 @@ ARCHITECTURE testbench OF tb_hex7seg IS
 				hex <= std_logic_vector( to_unsigned( i, 4 ) );
 				expect <= var_disp( i );
 				WAIT FOR 10 ns;
-				ASSERT( display = expect ) REPORT "Failed for a = "& integer'IMAGE( i ) SEVERITY error;
+				ASSERT( display = expect ) REPORT "Failed for Number = "& integer'IMAGE( i ) SEVERITY error;
 			END LOOP;
 			WAIT;
 		END PROCESS;
