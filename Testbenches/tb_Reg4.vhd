@@ -10,15 +10,15 @@ ARCHITECTURE testbench OF tb_Reg4 IS
   COMPONENT Reg4 IS
 		PORT(
 			clk, rst, ld	: IN  std_logic;
-			I					    : IN  std_logic_vector( 3 downto 0 );
-			Q					    : OUT std_logic_vector( 3 downto 0 )
+			I				: IN  std_logic_vector( 3 downto 0 );
+			Q				: OUT std_logic_vector( 3 downto 0 )
 		);
 	END COMPONENT;
 	
 	SIGNAL	clk, rst, ld	: std_logic;
-	SIGNAL	I, Q	 			  : std_logic_vector( 3 downto 0 );
-	SIGNAL	expect			  : std_logic_vector( 3 downto 0 );
-	SIGNAL	stop_clk			: std_logic := '0';
+	SIGNAL	I, Q	 		: std_logic_vector( 3 downto 0 );
+	SIGNAL	expect			: std_logic_vector( 3 downto 0 );
+	SIGNAL	stop_clk		: std_logic := '0';
 
 	BEGIN
 		DUT	:	Reg4 PORT MAP( clk, rst, ld, I, Q );
@@ -27,9 +27,9 @@ ARCHITECTURE testbench OF tb_Reg4 IS
 		BEGIN
 			WHILE stop_clk = '0' LOOP
 				clk <= '0';
-            WAIT FOR 2.5 ns;
-            clk <= '1';
-            WAIT FOR 2.5 ns;
+            WAIT FOR 5 ns;
+            	clk <= '1';
+            WAIT FOR 5 ns;
 			END LOOP;
 			WAIT;  -- stop the process
 		END PROCESS;
